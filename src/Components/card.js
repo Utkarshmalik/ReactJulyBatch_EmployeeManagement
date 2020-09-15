@@ -1,17 +1,30 @@
 import React from 'react';
-
+import {Card,Button} from 'react-bootstrap';
 const avatar=require("../Components/avatar.png")
 
-const Card=()=>
+const CardComponent=(props)=>
 {
+    console.log(props);
+    const {name,email,picture}=props.user;
+
+    const fullName=`${name.title} ${name.first} ${name.last}`
+
+    
     return(
-    <div style={ {border:"3px solid red" ,textAlign:"center"  } }  >
-    <img src={avatar}   />
-    <h3> My Name </h3>
-    <h4> Software Developer </h4>
-    </div>
+        <div style={{display:"inline-block",margin:"20px",padding:"10px"}}>
+        <Card style={{ width: '18rem' }}>
+        <Card.Img variant="top" src={picture.large} />
+        <Card.Body>
+          <Card.Title> {fullName}</Card.Title>
+          <Card.Text>
+         {email}
+          </Card.Text>
+        </Card.Body>
+      </Card>
+      </div>
+   
     )
 }
 
 
-export default Card;
+export default CardComponent;

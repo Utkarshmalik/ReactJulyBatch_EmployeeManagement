@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import Card from './Components/card';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Spinner } from 'react-bootstrap';
+import LoginForm from './Components/LoginForm';
+import Dashboard from './Components/Dashboard';
+
+
 const name="Utkarsh";
 
 class App extends Component
@@ -11,50 +15,24 @@ class App extends Component
     super();
 
     this.state={
-      loading:true,
-      users:[]
+      isLoggedIn:false
     }
+
   }
 
-  //Life Cycles Mehtods: ComponentDidMount 
-  componentDidMount()
+  onLoginHandle=()=>
   {
-    fetch("https://randomuser.me/api/?results=3000")
-    .then(data=>data.json())
-    .then(data=>
-      {
-        this.setState({
-          loading:false,
-          users:data.results 
-        })
-      }
-     )
-
-    console.log("Component is Mounted");
+    this.setState({isLoggedIn:true})
   }
-
-
+  
   render()
   {
-    console.log("I am rendered");
-
     return(
-      <div style={{textAlign:"center"}} >
-       <h1> Basic React App by {name}   </h1>
-
-       {
-         (this.state.loading) ? (
-
-          <Spinner animation="grow" />        
-         ) :(
-          this.state.users.map((user)=>
-          {
-           return <Card user={user}   />
-           })
-         )      
+      <div>
+      {
+        (this.state.isLoggedIn)?<Dashboard/>:<LoginForm onLogin={this.onLoginHandle} />
       }
-
-    </div> 
+      </div>
     )
   }
 }

@@ -10,20 +10,46 @@ class Dashboard extends Component
         super();
 
         this.state={
+            allUsers:[],
             users:[],
             loading:true
         }
     }
 
+    onInputChange(e)
+    {
+      const searchValue=e.target.value.toLowerCase();
+
+      console.log(this.state.allUsers);
+
+      const result=this.state.allUsers.filter((user)=>
+      {
+        const {name,email,picture}=user;
+        const fullName=`${name.title} ${name.first} ${name.last}`
+        const isIncluded=fullName.toLowerCase().includes(searchValue);
+
+        if(isIncluded)
+        return true;
+
+        return false;
+      });
+      
+      this.setState({
+        users:result
+      })
+
+    }
+
     componentDidMount()
     {
-    fetch("https://randomuser.me/api/?results=3000")
+    fetch("https://randomuser.me/api/?results=500")
     .then(data=>data.json())
     .then(data=>
       {
         this.setState({
           loading:false,
-          users:data.results 
+          users:data.results ,
+          allUsers:data.results
         })
       }
      )
@@ -37,7 +63,10 @@ class Dashboard extends Component
         if(this.state.loading)
         return <Loader/>
 
+        if(this.state.users.length)
         return <EmployeeList users={this.state.users}/>
+
+        return <div> <h3> OOPS! No Employees Available </h3>   </div>
     }
 
     render()
@@ -46,7 +75,7 @@ class Dashboard extends Component
         <div  style={{textAlign:"center"}}>
         <div style={{margin:"15px"}} >
         <h1>Employee Dashboard</h1>
-        <InputGroup className="mb-3">
+        <InputGroup onChange={(e)=>this.onInputChange(e)}  className="mb-3">
           <FormControl
             placeholder="Search"
             aria-label="Username"

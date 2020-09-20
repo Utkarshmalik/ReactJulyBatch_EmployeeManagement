@@ -1,21 +1,33 @@
 
-import React from 'react';
+import React, { Component } from 'react';
 import Card from './card';
 
-const EmployeeList=(props)=>
+class EmployeeList extends Component 
 {
 
+    constructor()
+    {
+        super();
+    }
 
+    shouldComponentUpdate()
+    {
+        return false;
+    }
+
+    render()
+    {
     return(
         <div>
         {
-          props.users.map((user)=>
+          this.props.users.map((user)=>
           {
-           return <Card user={user}   />
+           return <Card key={user.cell} user={user}   />
            })
         }
         </div>  
     )
+}
 }
 
 export default EmployeeList;

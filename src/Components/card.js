@@ -1,6 +1,9 @@
 import React from 'react';
 import {Card,Button} from 'react-bootstrap';
+import {Link,useRouteMatch,Switch,Route} from 'react-router-dom';
+import Temp from './temp';
 const avatar=require("../Components/avatar.png")
+
 
 const CardComponent=(props)=>
 {
@@ -9,6 +12,8 @@ const CardComponent=(props)=>
 
     const fullName=`${name.title} ${name.first} ${name.last}`
 
+      let match=useRouteMatch();
+        console.log(match.url);
     
     return(
         <div style={{display:"inline-block",margin:"20px",padding:"10px"}}>
@@ -21,6 +26,7 @@ const CardComponent=(props)=>
           </Card.Text>
         </Card.Body>
       </Card>
+
       </div>
    
     )

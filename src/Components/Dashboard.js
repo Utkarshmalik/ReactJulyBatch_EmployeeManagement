@@ -3,8 +3,11 @@ import {InputGroup,FormControl} from 'react-bootstrap';
 import EmployeeList from './EmployeeList';
 import Loader from './Loader';
 
+
 class Dashboard extends Component
 {
+ 
+
     constructor()
     {
         super();
@@ -12,12 +15,20 @@ class Dashboard extends Component
         this.state={
             allUsers:[],
             users:[],
-            loading:true
+            loading:true,
         }
+
+        
+    }
+
+    onButtonClick()
+    {
+      this.setState({redirect:"/"})
     }
 
     onInputChange(e)
     {
+
       const searchValue=e.target.value.toLowerCase();
 
       console.log(this.state.allUsers);
@@ -42,7 +53,7 @@ class Dashboard extends Component
 
     componentDidMount()
     {
-    fetch("https://randomuser.me/api/?results=500")
+    fetch("https://randomuser.me/api/?results=5")
     .then(data=>data.json())
     .then(data=>
       {
@@ -70,7 +81,9 @@ class Dashboard extends Component
     }
 
     render()
-    {    
+    {
+      
+
     return(
         <div  style={{textAlign:"center"}}>
         <div style={{margin:"15px"}} >

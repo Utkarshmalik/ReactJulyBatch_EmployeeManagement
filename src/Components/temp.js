@@ -7,8 +7,12 @@ class temp extends Component {
         this.state = {  };
     }
     render() {
+
+        console.log(this.props);
         return (
-          <h1> temp</h1>
+         <div>
+         {this.props.children}
+         </div>
         );
     }
 }

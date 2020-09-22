@@ -14,11 +14,14 @@ import Services from './ServiceComponent';
 
 import {BrowserRouter as Router, Switch,Route,Link} from "react-router-dom";
 
+import ThemeContextProvider from './Contexts/themeContext';
+
 
 const App=()=>
 {
   return(
     <Router>
+    <ThemeContextProvider>
     <div>
     <ul style={{textAlign:"center",margin:"20px"}} >
 
@@ -72,8 +75,8 @@ const App=()=>
 
 
     </Switch>
-
     </div>
+    </ThemeContextProvider>
     </Router>
   )
 

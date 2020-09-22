@@ -1,11 +1,15 @@
 
 import React, { Component } from 'react';
 import Card from './card';
+import TempComp from './temp';
+
+import {ThemeContext} from '../Contexts/themeContext';
+
 
 class EmployeeList extends Component 
 {
 
-    constructor()
+    constructor(props)
     {
         super();
     }
@@ -15,17 +19,23 @@ class EmployeeList extends Component
         return false;
     }
 
+    static contextType=ThemeContext;
+
     render()
     {
+        console.log(this.context);
     return(
+        <TempComp>
         <div>
         {
+
           this.props.users.map((user)=>
           {
            return <Card key={user.cell} user={user}   />
            })
         }
-        </div>  
+        </div> 
+        </TempComp> 
     )
 }
 }

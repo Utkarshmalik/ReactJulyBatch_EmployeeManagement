@@ -14,18 +14,28 @@ class EmployeeList extends Component
         super();
     }
 
-    shouldComponentUpdate()
-    {
-        return false;
-    }
-
-    static contextType=ThemeContext;
-
     render()
     {
-        console.log(this.context);
     return(
         <TempComp>
+
+            <ThemeContext.Consumer>
+                {
+                    (context)=>
+                    {
+
+                        console.log(context);
+
+                        return (<div>
+                            <h2>UserName:</h2>
+                            <h3> Language:{context.language} </h3></div>);
+
+                    }
+
+                }
+
+            </ThemeContext.Consumer>
+
         <div>
         {
 

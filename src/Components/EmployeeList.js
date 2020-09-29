@@ -1,53 +1,35 @@
 
-import React, { Component } from 'react';
+import React, { Component,useContext } from 'react';
 import Card from './card';
 import TempComp from './temp';
-
 import {ThemeContext} from '../Contexts/themeContext';
 
 
-class EmployeeList extends Component 
+const EmployeeList =(props)=>
 {
+    const context=useContext(ThemeContext);
 
-    constructor(props)
-    {
-        super();
-    }
-
-    render()
-    {
-    return(
-        <TempComp>
-
-            <ThemeContext.Consumer>
-                {
-                    (context)=>
-                    {
-
-                        console.log(context);
-
-                        return (<div>
-                            <h2>UserName:</h2>
-                            <h3> Language:{context.language} </h3></div>);
-
-                    }
-
-                }
-
-            </ThemeContext.Consumer>
-
+       return (
         <div>
-        {
+        <div>
+        <h2>UserName:</h2>
+        <h3> Language:{context.language} </h3>
+        </div>
 
-          this.props.users.map((user)=>
-          {
-           return <Card key={user.cell} user={user}   />
-           })
-        }
-        </div> 
-        </TempComp> 
+          
+    <div>
+    {
+         props.users.map((user)=>
+      {
+       return <Card key={user.cell} user={user}   />
+       })
+    }
+    </div>
+
+    </div>
     )
+
 }
-}
+
 
 export default EmployeeList;
